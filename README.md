@@ -1,1 +1,1 @@
-# omnipay-dnb
+# Omnipay: DNB 
