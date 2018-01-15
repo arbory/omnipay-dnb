@@ -1,9 +1,9 @@
 <?php
 
-namespace Omnipay\SwedbankBanklink\Messages;
+namespace Omnipay\DnbLink\Messages;
 
 use Omnipay\Common\Exception\InvalidResponseException;
-use Omnipay\SwedbankBanklink\Utils\Pizza;
+use Omnipay\DnbLink\Utils\Pizza;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 class CompleteRequest extends AbstractRequest

@@ -1,10 +1,10 @@
 <?php
 
-namespace Omnipay\SwedbankBanklink\Utils;
+namespace Omnipay\DnbLink\Utils;
 /**
  * Pizza protocol helper functions
  *
- * @package Omnipay\SwedbankBanklink\Utils
+ * @package Omnipay\DnbLink\Utils
  */
 class Pizza
 {

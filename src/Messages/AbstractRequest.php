@@ -1,8 +1,9 @@
 <?php
 
-namespace Omnipay\SwedbankBanklink\Messages;
+namespace Omnipay\DnbLink\Messages;
 
 use  Omnipay\Common\Message\AbstractRequest as CommonAbstractRequest;
+use Omnipay\Common\Message\ResponseInterface;
 
 abstract class AbstractRequest extends CommonAbstractRequest
 {
@@ -98,8 +99,8 @@ abstract class AbstractRequest extends CommonAbstractRequest
     }
 
     /**
-     * @param string $value
-     * @return $this
+     * @param $value
+     * @return CommonAbstractRequest
      */
     public function setGatewayUrl($value)
     {
@@ -116,7 +117,7 @@ abstract class AbstractRequest extends CommonAbstractRequest
 
     /**
      * @param mixed $data
-     * @return \Guzzle\Http\Message\Response
+     * @return ResponseInterface
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
     public function sendData($data)

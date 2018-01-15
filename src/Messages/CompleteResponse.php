@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\SwedbankBanklink\Messages;
+namespace Omnipay\DnbLink\Messages;
 
 class CompleteResponse extends AbstractResponse
 {

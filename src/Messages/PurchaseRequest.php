@@ -1,8 +1,8 @@
 <?php
 
-namespace Omnipay\SwedbankBanklink\Messages;
+namespace Omnipay\DnbLink\Messages;
 
-use Omnipay\SwedbankBanklink\Utils\Pizza;
+use Omnipay\DnbLink\Utils\Pizza;
 
 class PurchaseRequest extends AbstractRequest
 {

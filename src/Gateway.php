@@ -3,13 +3,13 @@
 namespace Omnipay\DnbLink;
 
 use Omnipay\Common\AbstractGateway;
-use Omnipay\SwedbankBanklink\Messages\PurchaseRequest;
-use Omnipay\SwedbankBanklink\Messages\CompleteRequest;
+use Omnipay\DnbLink\Messages\PurchaseRequest;
+use Omnipay\DnbLink\Messages\CompleteRequest;
 
 /**
  * Class Gateway
  *
- * @package Omnipay\SwedbankBanklink
+ * @package Omnipay\DnbLink
  */
 class Gateway extends AbstractGateway
 {
