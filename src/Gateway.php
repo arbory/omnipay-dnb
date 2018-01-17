@@ -18,7 +18,7 @@ class Gateway extends AbstractGateway
      */
     public function getName()
     {
-        return 'Swedbank Banlink';
+        return 'DnB Link';
     }
 
     /**
@@ -27,8 +27,12 @@ class Gateway extends AbstractGateway
     public function getDefaultParameters()
     {
         return array(
-            'gatewayUrl'           => 'https://ib.swedbank.lv/banklink/',
+            'gatewayUrl'            => 'https://ib.dnb.lv/login/index.php',
             'merchantId'            => '', //VK_SND_ID
+            'merchantBankAccount'   => '', //VK_ACC
+            'merchantName'          => '', //VK_NAME
+            'merchantRegNo'         => '', //VK_REG_ID
+            'merchantSwift'         => '', //VK_SWIFT
             'returnUrl'             => '',
             'certificatePath'       => '',
             'certificatePassword'   => '',
@@ -91,6 +95,74 @@ class Gateway extends AbstractGateway
     public function getMerchantId()
     {
         return $this->getParameter('merchantId');
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setMerchantBankAccount($value)
+    {
+        $this->setParameter('merchantBankAccount', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getMerchantBankAccount()
+    {
+        return $this->getParameter('merchantBankAccount');
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setMerchantName($value)
+    {
+        $this->setParameter('merchantName', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getMerchantName()
+    {
+        return $this->getParameter('merchantName');
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setMerchantRegNo($value)
+    {
+        $this->setParameter('merchantRegNo', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getMerchantRegNo()
+    {
+        return $this->getParameter('merchantRegNo');
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setMerchantSwift($value)
+    {
+        $this->setParameter('merchantSwift', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getMerchantSwift()
+    {
+        return $this->getParameter('merchantSwift');
     }
 
     /**
