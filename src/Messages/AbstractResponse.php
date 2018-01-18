@@ -3,6 +3,7 @@
 namespace Omnipay\DnbLink\Messages;
 
 use Omnipay\Common\Message\AbstractResponse as CommonAbstractResponse;
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 abstract class AbstractResponse extends CommonAbstractResponse
 {
@@ -43,4 +44,15 @@ abstract class AbstractResponse extends CommonAbstractResponse
         return $data['VK_REF'] ?? $data['VK_REF'];
     }
 
+    public function getCertificatePath()
+    {
+
+        return $this->request->getParameters()['certificatePat'];
+    }
+
+    public function getEncoding()
+    {
+
+        return $this->request->getParameters()['encoding'];
+    }
 }

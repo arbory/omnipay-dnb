@@ -14,20 +14,20 @@ class PurchaseRequest extends AbstractRequest
     private function getEncodedData()
     {
         $data = [
-            'VK_SERVICE'    => '1002', // Service code
-            'VK_VERSION'    => '101', // Protocol version
-            'VK_SND_ID'     => $this->getMerchantId(),
-            'VK_STAMP'      => $this->getTransactionReference(),  // Max 20 length
-            'VK_AMOUNT'     => $this->getAmount(), // Decimal with point
-            'VK_CURR'       => $this->getCurrency(), // ISO 4217 format (LVL/EUR, etc.)
-            'VK_ACC'        => $this->getMerchantId(),
-            'VK_NAME'        => $this->getMerchantId(),
-            'VK_REG_ID'        => $this->getMerchantId(),
-            'VK_SWIFT'        => $this->getMerchantId(),
-            'VK_REF'        => $this->getTransactionReference(),  // Max 20 length
-            'VK_MSG'        => $this->getDescription(), // Max 300 length,
-            'VK_RETURN'     => $this->getReturnUrl(), // 400 characters max
-            'VK_RETURN2'     => $this->getBackupReturnUrl(), // 400 characters max
+            'VK_SERVICE' => '1002', // Service code
+            'VK_VERSION' => '101', // Protocol version
+            'VK_SND_ID' => $this->getMerchantId(),
+            'VK_STAMP' => $this->getTransactionReference(),  // Max 20 length
+            'VK_AMOUNT' => $this->getAmount(), // Decimal with point
+            'VK_CURR' => $this->getCurrency(), // ISO 4217 format (LVL/EUR, etc.)
+            'VK_ACC' => $this->getMerchantBankAccount(),
+            'VK_NAME' => $this->getMerchantName(),
+            'VK_REG_ID' => $this->getMerchantRegNo(),
+            'VK_SWIFT' => $this->getMerchantSwift(),
+            'VK_REF' => $this->getTransactionReference(),  // Max 20 length
+            'VK_MSG' => $this->getDescription(), // Max 300 length,
+            'VK_RETURN' => $this->getReturnUrl(), // 400 characters max
+            'VK_RETURN2' => $this->getReturnUrlSecondary(), // 400 characters max
         ];
         return $data;
     }
@@ -35,11 +35,12 @@ class PurchaseRequest extends AbstractRequest
     /**
      * @return array
      */
-    private function getDecodedData(){
+    private function getDecodedData()
+    {
         $data = [
-            'VK_MAC'        => $this->generateControlCode($this->getEncodedData()), // MAC - Control code / signature
-            'VK_LANG'       => $this->getLanguage(), // Communication language (LAT, ENG RUS), no format standard?
-            'VK_TIME_LIMIT' => $this->getTimeLimit(), // Communication language (LAT, ENG RUS), no format standard?
+            'VK_MAC' => $this->generateControlCode($this->getEncodedData()), // MAC - Control code / signature
+            'VK_LANG' => $this->getLanguage(), // Communication language (LAT, ENG RUS), no format standard?
+            'VK_TIME_LIMIT' => '' //date( 'd.m.Y H:i:s', strtotime( '+1 hour' ) ); banks default = +10 days till 21:00:00
         ];
 
         return $data;
@@ -52,6 +53,22 @@ class PurchaseRequest extends AbstractRequest
     private function generateControlCode($data)
     {
         return Pizza::generateControlCode($data, $this->getEncoding(), $this->getCertificatePath());
+    }
+
+    /**
+     * @param $value
+     */
+    public function setReturnUrlSecondary($value)
+    {
+        $this->setParameter('returnUrlSecondary', $value);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReturnUrlSecondary()
+    {
+        return $this->getParameter('returnUrlSecondary');
     }
 
     /**

@@ -165,6 +165,8 @@ class Gateway extends AbstractGateway
         return $this->getParameter('merchantSwift');
     }
 
+
+
     /**
      * @param string $value
      * @return $this
@@ -180,6 +182,23 @@ class Gateway extends AbstractGateway
     public function getReturnUrl()
     {
         return $this->getParameter('returnUrl');
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setReturnUrlSecondary($value)
+    {
+        $this->setParameter('returnUrlSecondary', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getReturnUrlSecondary()
+    {
+        return $this->getParameter('returnUrlSecondary');
     }
 
     /**
