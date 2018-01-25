@@ -39,8 +39,8 @@ class PurchaseRequest extends AbstractRequest
     {
         $data = [
             'VK_MAC' => $this->generateControlCode($this->getEncodedData()), // MAC - Control code / signature
-            'VK_LANG' => $this->getLanguage(), // Communication language (LAT, ENG RUS), no format standard?
-            'VK_TIME_LIMIT' => '' //date( 'd.m.Y H:i:s', strtotime( '+1 hour' ) ); banks default = +10 days till 21:00:00
+            'VK_TIME_LIMIT' => '', //date( 'd.m.Y H:i:s', strtotime( '+1 hour' ) ); banks default = +10 days till 21:00:00
+            'VK_LANG' => $this->getLanguage() // Communication language (LAT, ENG RUS), no format standard?
         ];
 
         return $data;
