@@ -39,7 +39,7 @@ class Gateway extends AbstractGateway
             'returnUrlSecondary' => '',
 
             'privateCertificatePath' => '',
-            'privateCertificatePassword' => '',
+            'privateCertificatePassword' => null,
             'publicCertificatePath' => '',
             'testMode' => false,
 
@@ -222,7 +222,6 @@ class Gateway extends AbstractGateway
     {
         return $this->getParameter('returnUrlSecondary');
     }
-
 
     public function setPrivateCertificatePath($value)
     {

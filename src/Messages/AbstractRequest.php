@@ -7,23 +7,6 @@ use Omnipay\Common\Message\ResponseInterface;
 
 abstract class AbstractRequest extends CommonAbstractRequest
 {
-    /**
-     * @return mixed
-     */
-    public function getControlCode()
-    {
-        return $this->getParameter('controlCode');
-    }
-
-    /**
-     * @param mixed $controlCode
-     */
-    public function setControlCode($value)
-    {
-        return $this->setParameter('controlCode', $value);
-    }
-
-
 
     /**
      * @return mixed
@@ -39,6 +22,16 @@ abstract class AbstractRequest extends CommonAbstractRequest
     public function setEncoding($value)
     {
         return $this->setParameter('encoding', $value);
+    }
+
+    public function setPrivateCertificatePassword($value)
+    {
+        $this->setParameter('privateCertificatePassword', $value);
+    }
+
+    public function getPrivateCertificatePassword()
+    {
+        return $this->getParameter('privateCertificatePassword');
     }
 
     /**
@@ -57,21 +50,15 @@ abstract class AbstractRequest extends CommonAbstractRequest
         return $this->setParameter('returnUrl', $value);
     }
 
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setCertificatePath($value)
+    public function setPrivateCertificatePath($value)
     {
-        return $this->setParameter('certificatePath', $value);
+        $this->setParameter('privateCertificatePath', $value);
     }
 
-    /**
-     * @return string
-     */
-    public function getCertificatePath()
+
+    public function getPrivateCertificatePath()
     {
-        return $this->getParameter('certificatePath');
+        return $this->getParameter('privateCertificatePath');
     }
 
     /**
@@ -108,5 +95,133 @@ abstract class AbstractRequest extends CommonAbstractRequest
         return $this->getParameter('gatewayUrl');
     }
 
+    /**
+     * @param $value
+     */
+    public function setReturnUrlSecondary($value)
+    {
+        $this->setParameter('returnUrlSecondary', $value);
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getReturnUrlSecondary()
+    {
+        return $this->getParameter('returnUrlSecondary');
+    }
+
+    /**
+     * @param $value
+     */
+    public function setMerchantId($value)
+    {
+        $this->setParameter('merchantId', $value);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMerchantId()
+    {
+        return $this->getParameter('merchantId');
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setMerchantBankAccount($value)
+    {
+        $this->setParameter('merchantBankAccount', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getMerchantBankAccount()
+    {
+        return $this->getParameter('merchantBankAccount');
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setMerchantName($value)
+    {
+        $this->setParameter('merchantName', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getMerchantName()
+    {
+        return $this->getParameter('merchantName');
+    }
+
+    /**
+     * @param $value
+     */
+    public function setMerchantRegNo($value)
+    {
+        $this->setParameter('merchantRegNo', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getMerchantRegNo()
+    {
+        return $this->getParameter('merchantRegNo');
+    }
+
+    /**
+     * @param $value
+     */
+    public function setMerchantSwift($value)
+    {
+        $this->setParameter('merchantSwift', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getMerchantSwift()
+    {
+        return $this->getParameter('merchantSwift');
+    }
+    /**
+     * @param $value
+     */
+    public function setTestMode($value)
+    {
+        $this->setParameter('testMode', $value);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTestMode()
+    {
+        return $this->getParameter('testMode');
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setGatewayTestUrl($value)
+    {
+        $this->setParameter('gatewayTestUrl', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getGatewayTestUrl()
+    {
+        return $this->getParameter('gatewayTestUrl');
+    }
 }

@@ -6,7 +6,6 @@ use Omnipay\DnbLink\Utils\Pizza;
 
 class PurchaseRequest extends AbstractRequest
 {
-
     /**
      * @return array
      * @throws \Omnipay\Common\Exception\InvalidRequestException
@@ -34,6 +33,7 @@ class PurchaseRequest extends AbstractRequest
 
     /**
      * @return array
+     * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
     private function getDecodedData()
     {
@@ -52,112 +52,13 @@ class PurchaseRequest extends AbstractRequest
      */
     private function generateControlCode($data)
     {
-        return Pizza::generateControlCode($data, $this->getEncoding(), $this->getCertificatePath());
-    }
-
-    /**
-     * @param $value
-     */
-    public function setReturnUrlSecondary($value)
-    {
-        $this->setParameter('returnUrlSecondary', $value);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getReturnUrlSecondary()
-    {
-        return $this->getParameter('returnUrlSecondary');
-    }
-
-    /**
-     * @param $value
-     */
-    public function setMerchantId($value)
-    {
-        $this->setParameter('merchantId', $value);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMerchantId()
-    {
-        return $this->getParameter('merchantId');
-    }
-
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setMerchantBankAccount($value)
-    {
-        $this->setParameter('merchantBankAccount', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getMerchantBankAccount()
-    {
-        return $this->getParameter('merchantBankAccount');
-    }
-
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setMerchantName($value)
-    {
-        $this->setParameter('merchantName', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getMerchantName()
-    {
-        return $this->getParameter('merchantName');
-    }
-
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setMerchantRegNo($value)
-    {
-        $this->setParameter('merchantRegNo', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getMerchantRegNo()
-    {
-        return $this->getParameter('merchantRegNo');
-    }
-
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setMerchantSwift($value)
-    {
-        $this->setParameter('merchantSwift', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getMerchantSwift()
-    {
-        return $this->getParameter('merchantSwift');
+        return Pizza::generateControlCode($data, $this->getEncoding(), $this->getPrivateCertificatePath(), $this->getPrivateCertificatePassword());
     }
 
     /**
      * Glue together encoded and raw data
-     * @return array
+     * @return array|mixed
+     * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
     public function getData()
     {
@@ -166,12 +67,13 @@ class PurchaseRequest extends AbstractRequest
     }
 
     /**
-     * @param       $httpResponse
-     * @param array $data
-     * @return PurchaseResponse
+     * @param mixed $data
+     * @return \Omnipay\Common\Message\ResponseInterface|PurchaseResponse
      */
-    public function createResponse(array $data)
+    public function sendData($data)
     {
+        // Create fake response flow, so that user can be redirected
+        /** @var AbstractResponse $purchaseResponseObj */
         return $purchaseResponseObj = new PurchaseResponse($this, $data);
     }
 }
