@@ -27,19 +27,25 @@ class Gateway extends AbstractGateway
     public function getDefaultParameters()
     {
         return array(
-            'gatewayUrl'            => 'https://ib.dnb.lv/login/index.php',
-            'merchantId'            => '', //VK_SND_ID
-            'merchantBankAccount'   => '', //VK_ACC
-            'merchantName'          => '', //VK_NAME
-            'merchantRegNo'         => '', //VK_REG_ID
-            'merchantSwift'         => '', //VK_SWIFT
-            'returnUrl'             => '',
-            'certificatePath'       => '',
-            'certificatePassword'   => '',
+            'gatewayUrl' => 'https://ib.dnb.lv/login/index.php',
+            'gatewayTestUrl' => 'https://link.securet.dnb.lv/login/rid_login.php',
+
+            'merchantId' => '', //VK_SND_ID
+            'merchantBankAccount' => '', //VK_ACC
+            'merchantName' => '', //VK_NAME
+            'merchantRegNo' => '', //VK_REG_ID
+            'merchantSwift' => '', //VK_SWIFT
+            'returnUrl' => '',
+            'returnUrlSecondary' => '',
+
+            'privateCertificatePath' => '',
+            'privateCertificatePassword' => '',
+            'publicCertificatePath' => '',
+            'testMode' => false,
 
             //Global parameters for requests will be set via gateway
-            'language'              => 'LAT',
-            'encoding'              => 'UTF-8'
+            'language' => 'LAT',
+            'encoding' => 'UTF-8'
         );
     }
 
@@ -78,6 +84,23 @@ class Gateway extends AbstractGateway
     public function getGatewayUrl()
     {
         return $this->getParameter('gatewayUrl');
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setGatewayTestUrl($value)
+    {
+        $this->setParameter('gatewayTestUrl', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getGatewayTestUrl()
+    {
+        return $this->getParameter('gatewayTestUrl');
     }
 
     /**
@@ -166,7 +189,6 @@ class Gateway extends AbstractGateway
     }
 
 
-
     /**
      * @param string $value
      * @return $this
@@ -201,29 +223,53 @@ class Gateway extends AbstractGateway
         return $this->getParameter('returnUrlSecondary');
     }
 
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setCertificatePath($value)
+
+    public function setPrivateCertificatePath($value)
     {
-        $this->setParameter('certificatePath', $value);
+        $this->setParameter('privateCertificatePath', $value);
+    }
+
+
+    public function getPrivateCertificatePath()
+    {
+        return $this->getParameter('privateCertificatePath');
+    }
+
+
+    public function setPrivateCertificatePassword($value)
+    {
+        $this->setParameter('privateCertificatePassword', $value);
+    }
+
+    public function getPrivateCertificatePassword()
+    {
+        return $this->getParameter('privateCertificatePassword');
+    }
+
+    public function setPublicCertificatePath($value)
+    {
+        $this->setParameter('publicCertificatePath', $value);
+    }
+
+    public function getPublicCertificatePath()
+    {
+        return $this->getParameter('publicCertificatePath');
     }
 
     /**
-     * @return string
+     * @param $value
      */
-    public function getCertificatePath()
+    public function setTestMode($value)
     {
-        return $this->getParameter('certificatePath');
+        $this->setParameter('testMode', $value);
     }
 
     /**
      * @return mixed
      */
-    public function getLanguage()
+    public function getTestMode()
     {
-        return $this->getParameter('language');
+        return $this->getParameter('testMode');
     }
 
     /**
@@ -232,6 +278,14 @@ class Gateway extends AbstractGateway
     public function setLanguage($value)
     {
         $this->setParameter('language', $value);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLanguage()
+    {
+        return $this->getParameter('language');
     }
 
     /**
@@ -249,6 +303,4 @@ class Gateway extends AbstractGateway
     {
         $this->setParameter('encoding', $value);
     }
-
-
 }

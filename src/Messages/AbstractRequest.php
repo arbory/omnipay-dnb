@@ -8,13 +8,6 @@ use Omnipay\Common\Message\ResponseInterface;
 abstract class AbstractRequest extends CommonAbstractRequest
 {
     /**
-     * @param $data array
-     * @param $httpClient
-     * @return AbstractResponse
-     */
-    abstract protected function createResponse(array $data);
-
-    /**
      * @return mixed
      */
     public function getControlCode()
@@ -115,20 +108,5 @@ abstract class AbstractRequest extends CommonAbstractRequest
         return $this->getParameter('gatewayUrl');
     }
 
-    /**
-     * @param mixed $data
-     * @return ResponseInterface
-     * @throws \Omnipay\Common\Exception\InvalidRequestException
-     */
-    public function sendData($data)
-    {
-        $this->validate('certificatePath');
-        // Create fake response flow, so that user can be redirected
-        /** @var AbstractResponse $purchaseResponseObj */
-        $purchaseResponseObj = $this->createResponse($data);
-        $purchaseResponseObj->setReturnUrl($this->getReturnUrl());
-        $purchaseResponseObj->setGatewayUrl($this->getGatewayUrl());
-        return $purchaseResponseObj;
-    }
 
 }

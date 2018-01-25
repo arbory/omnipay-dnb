@@ -56,10 +56,9 @@ class CompleteResponse extends AbstractResponse
         'VK_REF' => true,
         'VK_MSG' => true,
         'VK_T_DATE' => true,
+        'VK_T_STATUS' => true,
         'VK_MAC' => false,
-        'VK_LANG' => false,
-        'VK_AUTO' => false,
-        'VK_ENCODING' => false
+        'VK_LANG' => false
     ];
 
     /**

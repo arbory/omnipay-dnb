@@ -16,15 +16,12 @@ class CompleteRequest extends AbstractRequest
         return $queryObj->all();
     }
 
-    /*
-     * Faking sending, this allows easier multi gateway flow processing
-     * This is done because omnipay's flow does not have a processing flow for direct response , only request -> response -> process result
+    /**
+     * @param mixed $data
+     * @return \Omnipay\Common\Message\ResponseInterface|CompleteResponse
      */
-    public function createResponse(array $data)
+    public function sendData($data)
     {
-        // Read data from request object
         return $purchaseResponseObj = new CompleteResponse($this, $data);
     }
-
-
 }
