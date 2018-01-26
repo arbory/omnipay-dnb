@@ -61,6 +61,17 @@ abstract class AbstractRequest extends CommonAbstractRequest
         return $this->getParameter('privateCertificatePath');
     }
 
+    public function setPublicCertificatePath($value)
+    {
+        $this->setParameter('publicCertificatePath', $value);
+    }
+
+
+    public function getPublicCertificatePath()
+    {
+        return $this->getParameter('publicCertificatePath');
+    }
+
     /**
      * @return mixed
      */
