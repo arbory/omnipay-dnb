@@ -33,7 +33,11 @@ class CompleteRequest extends AbstractRequest
 
     public function getData()
     {
-        return $this->httpRequest->request->all();
+        if($this->httpRequest->getMethod() == 'POST'){
+            return $this->httpRequest->request->all();
+        }else{
+            return $this->httpRequest->query->all();
+        }
     }
 
     /*
@@ -72,17 +76,8 @@ class CompleteRequest extends AbstractRequest
             throw new InvalidRequestException('Unknown VK_SERVICE code');
         }
 
-        $responseFields = $this->responseKeys;
-
-        //check for missing fields, will throw exc. on missing fields
-        foreach ($responseFields as $fieldName => $usedInHash ) {
-            if (! isset($response[$fieldName])) {
-                throw new InvalidRequestException("The $fieldName parameter is required");
-            }
-        }
-
         //verify data corruption
-        $this->validateIntegrity($responseFields);
+        $this->validateIntegrity($this->responseKeys);
     }
 
     /**
@@ -98,10 +93,6 @@ class CompleteRequest extends AbstractRequest
 
         // Get control code required fields with values
         $controlCodeFields = array_intersect_key( $responseData->all(), $controlCodeKeys );
-
-        //If you are testing requests by spoofing manually bank response, don't forget to url encode VK_MAC value
-        //https://stackoverflow.com/questions/5628738/strange-base64-encode-decode-problem
-        //$test = Pizza::test($controlCodeFields, $this->getCertificatePath(), $this->getEncoding());
 
         if(!Pizza::isValidControlCode($controlCodeFields, $responseData->get('VK_MAC'), $this->getPublicCertificatePath(), $this->getEncoding())){
             throw new InvalidRequestException('Data is corrupt or has been changed by a third party');
