@@ -86,13 +86,14 @@ class CompleteRequest extends AbstractRequest
      */
     protected function validateIntegrity(array $responseFields)
     {
+        $controlCodeFields = [];
         $responseData = new ParameterBag($this->getData());
 
-        // Get keys that are required for control code generation
-        $controlCodeKeys = array_filter($responseFields, function($val){ return $val; });
-
-        // Get control code required fields with values
-        $controlCodeFields = array_intersect_key( $responseData->all(), $controlCodeKeys );
+        foreach ($responseFields as $key => $shouldValidate) {
+            if ($shouldValidate) {
+                $controlCodeFields[$key] = $responseData->get($key);
+            }
+        }
 
         if(!Pizza::isValidControlCode($controlCodeFields, $responseData->get('VK_MAC'), $this->getPublicCertificatePath(), $this->getEncoding())){
             throw new InvalidRequestException('Data is corrupt or has been changed by a third party');
